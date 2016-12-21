@@ -5,7 +5,7 @@ import {
   Mesh,
   View,
 } from 'react-vr';
-import BouncyCube from './src/components/BouncyCube';
+import {BouncyCube} from './src/components/BouncyCube';
 
 class ReactVRTest extends React.Component {
 

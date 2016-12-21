@@ -2,22 +2,24 @@ import React from 'react';
 import {
     AppRegistry,
     asset,
-    StyleSheet,
     Mesh,
-    VRAnimated,
+    Animated,
     View,
 } from 'react-vr';
-class BouncyCube extends React.Component {
+
+//you must export the class in order for it to be available in the AppRegistry when an instance of the Class object is created
+export class BouncyCube extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            bounceValue: new VRAnimated.Value(0)
+            bounceValue: new Animated.Value(0)
         };
+        console.log('BouncyCube constructed');
     }
 
     render() {
         return (
-            <VRAnimated.View                         // Base: Image, Text, View
+            <Animated.View                         // Base: Image, Text, View
                 style={{
                     flex: 1,
                     transform: [                        // `transform` is an ordered array
@@ -27,22 +29,25 @@ class BouncyCube extends React.Component {
             >
                 <Mesh
                 source={{
-                    mesh:'assets/obj/primitives/cube/cube.obj',
-                    texture:'assets/obj/primitives/cube/cube.jpg'
+                    mesh:asset('obj/primitives/cube/cube.obj'),
+                    texture:asset('obj/primitives/cube/cube.jpg')
                 }}/>
-            </VRAnimated.View>
+            </Animated.View>
         );
     }
 
     componentDidMount() {
+
+        console.log('BouncyCube mounted');
+
         this.state.bounceValue.setValue(1.5);     // Start large
-        VRAnimated.spring(                          // Base: spring, decay, timing
+        Animated.spring(                          // Base: spring, decay, timing
             this.state.bounceValue,                 // Animate `bounceValue`
             {
                 toValue: 0.8,                         // Animate to smaller size
                 friction: 1,                          // Bouncier spring
             }
-        ).start();                                // Start the animation
+        ).start();                              // Start the animation
     }
 }
 
